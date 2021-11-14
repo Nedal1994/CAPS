@@ -1,0 +1,26 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "caps.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nedal1994/CAPS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nedal1994/CAPS/issues"
+  },
+  "homepage": "https://github.com/Nedal1994/CAPS#readme",
+  "dependencies": {
+    "event-emitter": "^0.3.5",
+    "faker": "^5.5.3",
+    "jest": "^27.3.1",
+    "supertest": "^6.1.6"
+  }
+}
