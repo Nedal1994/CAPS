@@ -1,18 +1,25 @@
 'use strict'
 
-const events = require('../event-pool')
+// const events = require('../event-pool')
+const io = require('socket.io-client');
+const host = 'http://localhost:3000';
+const driverConnection = io.connect(`${host}`);
 
+driverConnection.on('driver', driverHandler);
+driverConnection.on('pickup', pickup);
+
+function driverHandler(payload) {
+  console.log(`Driver is delivering order number ${payload.orderId}`);
+}
 
 function pickup(payload)
 {
-    setTimeout(()=>{
         console.log(`Driver: Picked up ${payload.orderId}`);
-        events.emit('in-transit',payload)
-    },2000)
+        driverConnection.emit('in-transit',payload)
 
-    setTimeout(()=>{
         console.log(`Driver: delivered  ${payload.orderId}`);
-        events.emit('delivered',payload)
-    },2000)
+        driverConnection.emit('delivered',payload)
 }
-module.exports=pickup
+
+
+module.exports={driverHandler,pickup}

@@ -2,16 +2,18 @@
 
 const events = require('../event-pool');
 const faker = require('faker')
+const io = require('socket.io-client');
+const host = 'http://localhost:3000';
+const vendorConnection = io.connect(host);
 
 const storeName = '1-206-flowers'
-events.on('delivered',deliveredOrder)
+vendorConnection.on('delivered',deliveredOrder)
 
-function deliveredOrder()
+function deliveredOrder(payload)
 {
     console.log(`Vendor: Thank you for ordering ${payload.orderId}`);
 }
-
-
+// emit means alert or notification
 setInterval(() => {
     let order={
         Store: storeName,
@@ -20,6 +22,7 @@ setInterval(() => {
         Address: faker.address.streetAddress()
     }
     events.emit('pickup' ,order)
-}, 2000);
+    vendorConnection.emit('pickup' ,order)
+}, 10000);
 
 module.exports=deliveredOrder
