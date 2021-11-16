@@ -19,6 +19,12 @@ function pickup(payload)
 
         console.log(`Driver: delivered  ${payload.orderId}`);
         driverConnection.emit('delivered',payload)
+
+        driverConnection.emit('get_all')
+        driverConnection.on('message-delivered',message=>{
+        console.log('The message is received');
+        driverConnection.emit('received',message)
+        })
 }
 
 
